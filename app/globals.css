@@ -86,7 +86,7 @@ nav a.active {
 /* Main Content */
 main {
   padding: 3rem 2.5rem;
-  max-width: 1000px;
+  max-width: 900px;
 }
 
 /* Page Title */
@@ -130,8 +130,8 @@ main {
 
 .exhibition-image {
   width: 100%;
-  max-width: 700px;
-  aspect-ratio: 4/5;
+  max-width: 600px;
+  aspect-ratio: 3/2;
   background: linear-gradient(145deg, #e8e4d9 0%, #d4d0c5 50%, #c9c5ba 100%);
   margin-bottom: 1.5rem;
   position: relative;
@@ -324,33 +324,45 @@ main {
 }
 
 /* Archive Grid */
+.archive-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+}
+
+.archive-scroll {
+  width: 100vw;
+  margin-left: -2.5rem;
+  overflow: hidden;
+  border-top: 1px solid var(--text-tertiary);
+  padding-top: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.archive-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 .archive-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  animation: marquee 60s linear infinite;
+}
+
+.archive-grid:hover {
+  animation-play-state: paused;
 }
 
 .archive-item {
-  cursor: pointer;
-  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+  min-width: 200px;
+  max-width: 250px;
 }
 
 .archive-item:hover {
   opacity: 0.7;
-}
-
-.archive-image {
-  aspect-ratio: 4/5;
-  background: linear-gradient(145deg, #ddd 0%, #ccc 100%);
-  margin-bottom: 0.75rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.archive-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .archive-artist {
@@ -369,6 +381,15 @@ main {
 .archive-dates {
   font-size: 0.7rem;
   color: var(--text-tertiary);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* About Sections */
@@ -512,9 +533,16 @@ footer {
   }
 
   .archive-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
+  display: flex;
+  gap: 3rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.archive-grid::-webkit-scrollbar {
+  display: none;
+}
 
   .tier-header {
     flex-direction: column;

@@ -1,32 +1,6 @@
-import { client, urlFor } from '@/lib/sanity';
+import content from '@/content/site-content.json';
 import Image from 'next/image';
 import Link from 'next/link';
-
-async function getData() {
-  const query = `{
-    "currentExhibition": *[_type == "exhibition" && current == true][0] {
-      artist,
-      title,
-      startDate,
-      endDate,
-      image
-    },
-    "events": *[_type == "event" && date >= now()] | order(date asc) [0...5] {
-      _id,
-      name,
-      date,
-      time
-    },
-    "settings": *[_type == "siteSettings"][0] {
-      hours,
-      address,
-      galleryNote,
-      barNote
-    }
-  }`;
-  
-  return client.fetch(query);
-}
 
 function formatDate(dateString: string) {
   const date = new Date(dateString);
@@ -38,11 +12,11 @@ function formatDateRange(start: string, end: string) {
   const endDate = new Date(end);
   const startStr = startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   const endStr = endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  return `${startStr} — ${endStr}`;
+  return `${startStr} – ${endStr}`;
 }
 
-export default async function Home() {
-  const { currentExhibition, events, settings } = await getData();
+export default function Home() {
+  const { currentExhibition, upcomingEvents, siteSettings } = content;
 
   return (
     <main>
@@ -51,7 +25,7 @@ export default async function Home() {
           <div className="exhibition-image">
             {currentExhibition.image && (
               <Image
-                src={urlFor(currentExhibition.image).width(1400).url()}
+                src={currentExhibition.image}
                 alt={`${currentExhibition.artist} - ${currentExhibition.title}`}
                 fill
                 style={{ objectFit: 'cover' }}
@@ -69,12 +43,12 @@ export default async function Home() {
         </section>
       )}
 
-      {events && events.length > 0 && (
+      {upcomingEvents && upcomingEvents.length > 0 && (
         <section className="upcoming">
           <h3 className="section-title">Upcoming</h3>
           <div className="events-list">
-            {events.map((event: any) => (
-              <div key={event._id} className="event">
+            {upcomingEvents.map((event) => (
+              <div key={event.id} className="event">
                 <span className="event-date">{formatDate(event.date)}</span>
                 <span className="event-name">{event.name}</span>
                 <span className="event-time">{event.time}</span>
@@ -87,22 +61,22 @@ export default async function Home() {
       <section className="info">
         <div className="info-block">
           <span className="info-label">Hours</span>
-          <span className="info-text" dangerouslySetInnerHTML={{ __html: settings?.hours?.replace(/\n/g, '<br>') || 'Thu–Sat<br>6pm–12am' }} />
+          <span className="info-text" dangerouslySetInnerHTML={{ __html: siteSettings.hours.replace(/\n/g, '<br>') }} />
         </div>
         <div className="info-block">
           <span className="info-label">Location</span>
           <span className="info-text">
-            <a href="#" dangerouslySetInnerHTML={{ __html: settings?.address?.replace(/\n/g, '<br>') || '124 Main Street<br>Newburgh, NY 12550' }} />
+            <a href="#" dangerouslySetInnerHTML={{ __html: siteSettings.address.replace(/\n/g, '<br>') }} />
+            <br />
+            <small style={{ opacity: 0.7 }}>{siteSettings.addressNote}</small>
           </span>
         </div>
       </section>
 
       <section className="membership-cta">
-        <p className="membership-note">{settings?.galleryNote || 'Gallery open to the public'} · {settings?.barNote || 'Bar for members'}</p>
+        <p className="membership-note">{siteSettings.galleryNote} · {siteSettings.barNote}</p>
         <Link href="/membership" className="btn">Become a Member</Link>
       </section>
     </main>
   );
 }
-
-export const revalidate = 60;
