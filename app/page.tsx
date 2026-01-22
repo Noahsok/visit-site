@@ -2,6 +2,32 @@ import content from '@/content/site-content.json';
 import Image from 'next/image';
 import Link from 'next/link';
 
+interface Event {
+  id: string;
+  name: string;
+  date: string;
+  time: string;
+}
+
+interface SiteContent {
+  currentExhibition: {
+    artist: string;
+    title: string;
+    startDate: string;
+    endDate: string;
+    image: string;
+    pressRelease: string;
+  };
+  upcomingEvents: Event[];
+  siteSettings: {
+    hours: string;
+    address: string;
+    addressNote: string;
+    galleryNote: string;
+    barNote: string;
+  };
+}
+
 function formatDate(dateString: string) {
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
@@ -16,7 +42,7 @@ function formatDateRange(start: string, end: string) {
 }
 
 export default function Home() {
-  const { currentExhibition, upcomingEvents, siteSettings } = content;
+  const { currentExhibition, upcomingEvents, siteSettings } = content as SiteContent;
 
   return (
     <main>
