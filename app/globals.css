@@ -1,8 +1,8 @@
 :root {
   --bg: #FEFFF8;
   --text-primary: #3A2B2B;
-  --text-secondary: rgba(58, 43, 43, 0.78);
-  --text-tertiary: rgba(58, 43, 43, 0.55);
+  --text-secondary: rgba(58, 43, 43, 0.82);
+  --text-tertiary: rgba(58, 43, 43, 0.58);
   --black: #000000;
 }
 
@@ -380,7 +380,7 @@ main {
 
 .archive-dates {
   font-size: 0.7rem;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
 }
 
 @keyframes marquee {
