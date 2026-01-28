@@ -1,0 +1,49 @@
+import './globals.css';
+import type { Metadata } from 'next';
+import { Playfair_Display } from 'next/font/google';
+import Link from 'next/link';
+
+const playfair = Playfair_Display({ 
+  subsets: ['latin'],
+  variable: '--font-playfair',
+});
+
+export const metadata: Metadata = {
+  title: 'Visit — Newburgh, NY',
+  description: 'Contemporary art gallery and cocktail bar in Newburgh, NY',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={playfair.variable}>
+      <body>
+        <header>
+          <Link href="/" className="logo">Visit</Link>
+          <span className="location">Newburgh, NY</span>
+        </header>
+
+        <nav>
+          <ul>
+            <li><Link href="/exhibitions">Exhibitions</Link></li>
+            <li><Link href="/artists">Artists</Link></li>
+            <li><Link href="/bar">Bar</Link></li>
+            <li><Link href="/membership">Membership</Link></li>
+          </ul>
+        </nav>
+
+        {children}
+
+        <footer>
+          <div className="footer-links">
+            <a href="https://instagram.com/visitnewburgh" target="_blank" rel="noopener noreferrer">@visitnewburgh</a>
+            <a href="#">Newsletter</a>
+          </div>
+        </footer>
+      </body>
+    </html>
+  );
+}
