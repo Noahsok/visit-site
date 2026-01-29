@@ -16,8 +16,7 @@ async function getData() {
       artist,
       title,
       startDate,
-      endDate,
-      image
+      endDate
     }
   }`;
   
@@ -36,31 +35,33 @@ export default async function Exhibitions() {
   const { current, archive } = await getData();
 
   return (
-    <main>
+    <main className="exhibitions-page">
       <h1 className="page-title">Exhibitions</h1>
 
       {current && (
         <section className="current-exhibition">
           <h2 className="section-title">Current</h2>
-          <div className="current-exhibition-image">
-            {current.image && (
-              <Image
-                src={urlFor(current.image).width(1400).url()}
-                alt={`${current.artist} - ${current.title}`}
-                fill
-                style={{ objectFit: 'cover' }}
-              />
-            )}
-          </div>
-          <div className="current-exhibition-info">
-            <h3 className="exhibition-artist">{current.artist}</h3>
-            <h4 className="exhibition-title">{current.title}</h4>
-            <p className="exhibition-dates">
-              {formatDateRange(current.startDate, current.endDate)}
-            </p>
-            {current.description && (
-              <p className="exhibition-description">{current.description}</p>
-            )}
+          <div className="current-exhibition-layout">
+            <div className="current-exhibition-image">
+              {current.image && (
+                <Image
+                  src={urlFor(current.image).width(800).url()}
+                  alt={`${current.artist} - ${current.title}`}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              )}
+            </div>
+            <div className="current-exhibition-info">
+              <h3 className="exhibition-artist">{current.artist}</h3>
+              <h4 className="exhibition-title">{current.title}</h4>
+              <p className="exhibition-dates">
+                {formatDateRange(current.startDate, current.endDate)}
+              </p>
+              {current.description && (
+                <p className="exhibition-description">{current.description}</p>
+              )}
+            </div>
           </div>
         </section>
       )}
@@ -71,17 +72,7 @@ export default async function Exhibitions() {
           <div className="archive-scroll-container">
             <div className="archive-scroll">
               {archive.map((show: any) => (
-                <div key={show._id} className="archive-card">
-                  <div className="archive-card-image">
-                    {show.image && (
-                      <Image
-                        src={urlFor(show.image).width(500).url()}
-                        alt={`${show.artist} - ${show.title}`}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                      />
-                    )}
-                  </div>
+                <div key={show._id} className="archive-item">
                   <h3 className="archive-artist">{show.artist}</h3>
                   <h4 className="archive-title">{show.title}</h4>
                   <p className="archive-dates">{formatDateRange(show.startDate, show.endDate)}</p>

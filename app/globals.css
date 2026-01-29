@@ -41,10 +41,12 @@ header {
 }
 
 .logo {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
+  display: block;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
 }
 
 .location {
@@ -81,12 +83,12 @@ nav a:hover {
 /* Main Content */
 main {
   padding: 3rem 2.5rem;
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
 /* Page Title */
 .page-title {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
   font-size: 2rem;
   font-weight: 400;
   margin-bottom: 2rem;
@@ -101,24 +103,118 @@ main {
   margin-bottom: 1.5rem;
 }
 
-/* Intro Text */
-.intro {
+/* Current Exhibition - Side by Side */
+.current-exhibition {
+  margin-bottom: 4rem;
+}
+
+.current-exhibition-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.current-exhibition-image {
+  aspect-ratio: 4/5;
+  background: linear-gradient(145deg, #e8e4d9 0%, #d4d0c5 50%, #c9c5ba 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.current-exhibition-info {
+  padding-top: 1rem;
+}
+
+.exhibition-artist {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+
+.exhibition-title {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+.exhibition-dates {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+
+.exhibition-description {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 3rem;
-  max-width: 550px;
+  line-height: 1.8;
 }
 
-.intro p {
-  margin-bottom: 1rem;
+/* Archive - Text Only Horizontal Scroll */
+.archive-section {
+  padding-top: 2rem;
+  border-top: 1px solid var(--text-tertiary);
 }
 
-.intro p:last-child {
-  margin-bottom: 0;
+.archive-scroll-container {
+  position: relative;
+  margin-right: -2.5rem;
 }
 
-/* Exhibition */
+.archive-scroll {
+  display: flex;
+  gap: 3rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1.5rem;
+  padding-right: 2.5rem;
+  scrollbar-width: none;
+}
+
+.archive-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.archive-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  white-space: nowrap;
+}
+
+.archive-scroll-fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 1.5rem;
+  width: 80px;
+  background: linear-gradient(to right, transparent, var(--bg));
+  pointer-events: none;
+}
+
+.archive-artist {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.archive-title {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+.archive-dates {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Homepage Exhibition */
 .exhibition {
   margin-bottom: 4rem;
 }
@@ -133,125 +229,8 @@ main {
   overflow: hidden;
 }
 
-.exhibition-artist {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.75rem;
-  font-weight: 400;
-  margin-bottom: 0.25rem;
-}
-
-.exhibition-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.75rem;
-  font-weight: 400;
-  font-style: italic;
-  margin-bottom: 0.5rem;
-}
-
-.exhibition-dates {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.05em;
-}
-
-/* Current Exhibition */
-.current-exhibition {
-  margin-bottom: 4rem;
-}
-
-.current-exhibition-image {
-  width: 100%;
+.exhibition-info {
   max-width: 700px;
-  aspect-ratio: 4/5;
-  background: linear-gradient(145deg, #e8e4d9 0%, #d4d0c5 50%, #c9c5ba 100%);
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-}
-
-.current-exhibition-info {
-  max-width: 500px;
-}
-
-.exhibition-description {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-top: 1.5rem;
-}
-
-/* Archive Horizontal Scroll */
-.archive-section {
-  padding-top: 2rem;
-  border-top: 1px solid var(--text-tertiary);
-}
-
-.archive-scroll-container {
-  position: relative;
-  margin-right: -2.5rem;
-}
-
-.archive-scroll {
-  display: flex;
-  gap: 1.25rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 1.5rem;
-  padding-right: 2.5rem;
-  scrollbar-width: none;
-}
-
-.archive-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.archive-card {
-  flex: 0 0 calc(75vw - 2rem);
-  max-width: 280px;
-  scroll-snap-align: start;
-}
-
-.archive-card-image {
-  aspect-ratio: 4/5;
-  background: linear-gradient(145deg, #e8e4d9 0%, #d4d0c5 100%);
-  margin-bottom: 0.75rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.archive-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.archive-scroll-fade {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 1.5rem;
-  width: 60px;
-  background: linear-gradient(to right, transparent, var(--bg));
-  pointer-events: none;
-}
-
-.archive-artist {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1rem;
-  margin-bottom: 0.15rem;
-}
-
-.archive-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1rem;
-  font-style: italic;
-  margin-bottom: 0.25rem;
-}
-
-.archive-dates {
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
 }
 
 /* Events */
@@ -286,7 +265,7 @@ main {
 }
 
 .event-name {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
   font-size: 1.1rem;
 }
 
@@ -324,15 +303,6 @@ main {
   line-height: 1.6;
 }
 
-.info-text a {
-  border-bottom: 1px solid var(--text-tertiary);
-}
-
-.info-text a:hover {
-  border-color: var(--text-primary);
-  opacity: 1;
-}
-
 /* Membership CTA */
 .membership-cta {
   margin-top: 3rem;
@@ -348,7 +318,7 @@ main {
 
 .btn {
   display: inline-block;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
   font-size: 0.95rem;
   padding: 0.75rem 1.5rem;
   border: 1px solid var(--text-primary);
@@ -364,39 +334,17 @@ main {
   opacity: 1;
 }
 
-/* Photo Grid */
-.photo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+/* Intro Text */
+.intro {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
   margin-bottom: 3rem;
+  max-width: 550px;
 }
 
-.photo {
-  background: linear-gradient(145deg, #d4cfc4 0%, #c9c4b9 50%, #beb9ae 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.photo:nth-child(1) {
-  grid-column: span 2;
-  aspect-ratio: 21/9;
-}
-
-.photo:nth-child(2),
-.photo:nth-child(3) {
-  aspect-ratio: 4/5;
-}
-
-.photo:nth-child(4),
-.photo:nth-child(5) {
-  aspect-ratio: 1/1;
-}
-
-.photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.intro p {
+  margin-bottom: 1rem;
 }
 
 /* Artists List */
@@ -407,31 +355,10 @@ main {
 }
 
 .artist-name {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
   font-size: 1.15rem;
   font-weight: 400;
   color: var(--text-primary);
-}
-
-/* About Sections */
-.about-section {
-  margin-bottom: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--text-tertiary);
-}
-
-.about-text {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-.about-text p {
-  margin-bottom: 1rem;
-}
-
-.about-text p:last-child {
-  margin-bottom: 0;
 }
 
 /* Tiers */
@@ -454,7 +381,7 @@ main {
 }
 
 .tier-name {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
   font-size: 1.25rem;
   font-weight: 400;
 }
@@ -476,9 +403,6 @@ footer {
   margin-top: 4rem;
   padding: 2rem 2.5rem;
   border-top: 1px solid var(--text-tertiary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .footer-links {
@@ -515,9 +439,18 @@ footer {
     font-size: 1.6rem;
   }
 
+  .current-exhibition-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .current-exhibition-image {
+    aspect-ratio: 1/1;
+  }
+
   .exhibition-artist,
   .exhibition-title {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .event {
@@ -535,31 +468,12 @@ footer {
     gap: 2rem;
   }
 
-  .photo-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .photo:nth-child(1) {
-    grid-column: span 1;
-    aspect-ratio: 16/9;
-  }
-
-  .photo:nth-child(2),
-  .photo:nth-child(3),
-  .photo:nth-child(4),
-  .photo:nth-child(5) {
-    aspect-ratio: 4/3;
-  }
-
   .tier-header {
     flex-direction: column;
     gap: 0.25rem;
   }
 
   footer {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
     padding: 1.5rem;
   }
 
@@ -569,9 +483,6 @@ footer {
 
   .archive-scroll {
     padding-right: 1.5rem;
-  }
-
-  .archive-card {
-    flex: 0 0 calc(80vw - 1rem);
+    gap: 2rem;
   }
 }
