@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Playfair_Display } from 'next/font/google';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
@@ -22,7 +23,15 @@ export default function RootLayout({
     <html lang="en" className={playfair.variable}>
       <body>
         <header>
-          <Link href="/" className="logo">Visit</Link>
+          <Link href="/" className="logo">
+            <Image 
+              src="/Logo-Visit.png" 
+              alt="Visit" 
+              width={100} 
+              height={40}
+              style={{ height: 'auto' }}
+            />
+          </Link>
           <span className="location">Newburgh, NY</span>
         </header>
 
